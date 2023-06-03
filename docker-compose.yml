@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  db:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  node-app:
+    build:
+      context: ./
+    image: node-app
+    depends_on:
+      - db
+    environment:
+      NODE_ENV: production
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: postgres
+      JWT_SECRET: supersecret
+      GITHUB_CLIENT_ID: 977052708d6127ada4c1
+      GITHUB_CLIENT_SECRET: 89a825265f5f02c1fa498db2b144f7b550fe6d94
+      SECRET_SESSION: keyboard cat
+    links:
+      - db
+    volumes:
+      - './:/app'
+      - /app/node_modules/bcrypt/
+volumes:
+  db:
+    driver: local

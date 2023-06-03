@@ -16,7 +16,7 @@ class User extends Core {
           const sqlQuery = `UPDATE "user" 
                 SET        
                 image_path = $1        
-                 WHERE id = $2;
+                WHERE id = $2;
                 `;
           const values = [
             file,            

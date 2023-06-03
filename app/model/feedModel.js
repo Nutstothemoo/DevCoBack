@@ -41,10 +41,10 @@ class Feed extends Core {
 
     const preparedQuery = {
       text: `
-                 INSERT INTO "${this.tableName}"
-                 (${fields})
-                 VALUES (${placeholders})
-                 RETURNING *
+                INSERT INTO "${this.tableName}"
+                (${fields})
+                VALUES (${placeholders})
+                RETURNING *
            `,
       values,
     };

@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
-
+app.enable("trust proxy")
 
 
 // SWAGGER
@@ -39,14 +39,14 @@ const options = {
     },
   },
   //Chemin de la doc
-  //swaggerUIPath: "/devboard",
-  // security: {
-  //   basic: {
-  //     type: "http",
-  //     scheme: "basic",
-  //     bearerFormat: "JWT "
-  //   }
-  // },
+  swaggerUIPath: "/devboard",
+  security: {
+    basic: {
+      type: "http",
+      scheme: "basic",
+      bearerFormat: "JWT "
+    }
+  },
   security: {
     TokenAuth : {
       type: 'http',

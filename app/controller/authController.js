@@ -13,7 +13,7 @@ const authController = {
      */
     registerUser: async (req, res) => {
     try {
-
+        console.log("req.body :", req.body)
         // verify if the password and the password confirmation are the same
         if (req.body.password !== req.body.passwordConfirm) return res.status(400).json( {msg: 'les mots de passe  ne correspondent pas'})
 
@@ -23,7 +23,7 @@ const authController = {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         // generate an instance of User class 
         const savedUser =  new User();
-       
+
         // get a user by its email 
         const userEmail = await savedUser.findByField("email",req.body.email);
         // get a user by its username
@@ -69,7 +69,8 @@ const authController = {
           // generate an instance of User class   
             const user = new User();
              // get a user by its email 
-            const userAuth = await user.findByField("email", req.body.email);
+            const userAuth = await user.findByField("email", req.body.email);  
+            console.log(userAuth)
             //const userAuth = await User.findAll({ $where: {email:req.body.email} });
             
             
@@ -80,8 +81,8 @@ const authController = {
             // if passwords dont match an error is send 
                 if(await bcrypt.compare(req.body.password, userAuth.password)){
                     //get token 
-            const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
-            // password is deleted before it is send 
+                const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+                // password is deleted before it is send 
            
             delete userAuth.password;
             // token and user send 

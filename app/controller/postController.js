@@ -20,7 +20,7 @@ const postController = {
                 throw Error()
             }
         } catch (error) {
-            res.status(404).json({message: err.message})
+            res.status(404).json({message: error.message})
         }
     },
 
@@ -156,10 +156,10 @@ const postController = {
      deletePost: async (req,res) => {
         try {
            
-           const post = new Post();
-           const newPost = await post.delete(req.params.id);
-           res.status(200).json(newPost)
-  
+            const post = new Post();
+            const newPost = await post.delete(req.params.id);
+            res.status(200).json(newPost)
+
         } catch(err) {
            res.status(404).json({message: err.message})
         }
