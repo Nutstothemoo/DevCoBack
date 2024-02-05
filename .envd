@@ -1,0 +1,10 @@
+PORT=3000
+PGHOST=dpg-chs9or8rddl7ata3g9tg-a
+PGUSER=maxime
+PGPASSWORD=h9qLvSOT0LTVxo0MvXkfXPDmx9juoXMw
+PGDATABASE=devboard
+JWT_SECRET=supersecret
+GITHUB_CLIENT_ID=977052708d6127ada4c1
+GITHUB_CLIENT_SECRET=89a825265f5f02c1fa498db2b144f7b550fe6d94
+SECRET_SESSION=keyboard
+DATABASE_URL=postgres://maxime:h9qLvSOT0LTVxo0MvXkfXPDmx9juoXMw@dpg-chs9or8rddl7ata3g9tg-a.frankfurt-postgres.render.com/devboard
