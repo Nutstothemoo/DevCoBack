@@ -13,7 +13,6 @@ const feedController = {
                await Promise.all(feeds.map(async (feed) => {
                const feedData = await parser.parseURL(`${feed.url}`);
                news.push(feedData);
-               console.log("feed envoyé")
             }))
             res.status(200).json(news)   
             

@@ -76,7 +76,6 @@ const postController = {
     }
     },
 
-  // update a post
      modifyPost: async (req, res)=> {
         try {
   

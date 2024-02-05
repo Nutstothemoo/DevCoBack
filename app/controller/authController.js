@@ -29,22 +29,18 @@ const authController = {
         const userUsername = await savedUser.findByField("username", req.body.username)
         
 
-       //  verify if email and or username already exist in the database if so, send a error message 
-        if(userEmail ){
-            res.status(404).json('user with that email already exist')
-        } else if( userUsername) {
-            res.status(404).json('user with that  username already exist')
-        }
-        //else create user and insert it into database
+            if(userEmail){
+                res.status(409).json('User with that email already exists');
+            } else if(userUsername) {
+                res.status(409).json('User with that username already exists');
+            }
         else{
             const newUser = await savedUser.create({
                 username: req.body.username,
                 email: req.body.email,
                 password: hashedPassword,
             });
-            // get the token 
             const token = jwt.sign({id: newUser._id}, process.env.JWT_SECRET);
-            //send user  and token 
             delete newUser.password;
             res.status(201).json({token, newUser}); 
         }
